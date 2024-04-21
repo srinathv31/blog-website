@@ -1,15 +1,16 @@
 export default function parseRss(content: string) {
-  let counter = 0;
+  const MAX_CHAR_COUNT = 250;
+  let charCount = 0;
   const regEx = new RegExp(/|^\w\s]l_/g);
   const contentBlurb = content
     .split("<p>")[1]
     .split(" ")
     .map((word) => {
-      if (counter < 30) {
-        counter += 1;
+      if (charCount < MAX_CHAR_COUNT) {
+        charCount += word.length;
         return word;
-      } else if (counter === 30) {
-        counter += 1;
+      } else if (charCount === MAX_CHAR_COUNT) {
+        charCount += 1;
         // adding the ellipsis to the end.
         if (regEx.test(word[word.length - 1])) {
           return `${word.split("").slice(0, -1).join("")}...`;
@@ -17,7 +18,7 @@ export default function parseRss(content: string) {
           // expression, we'll simply return the word with the ellipsis
           // attached.
         } else {
-          return "${word}...";
+          return `${word}...`;
         }
       } else {
         return null;
@@ -25,5 +26,5 @@ export default function parseRss(content: string) {
     })
     .join(" ");
 
-  return contentBlurb;
+  return contentBlurb.replace(/<[^>]*>?/gm, "");
 }
