@@ -6,11 +6,25 @@ import { Badge } from "../ui/badge";
 export default function SkeletonFeed(): JSX.Element {
   return (
     <>
-      <Avatar>
-        <div className="animate-pulse rounded-full bg-slate-700 h-10 w-10"></div>
-      </Avatar>
-      <div className="animate-pulse rounded bg-slate-700 h-5 w-52 m-2"></div>
-      <div className="animate-pulse rounded bg-slate-700 h-5 w-52 m-2"></div>
+      <section className="m-12">
+        <div className="flex items-center justify-center">
+          <Avatar className="w-24 h-24">
+            <div className="animate-pulse rounded-full bg-slate-700 h-24 w-24"></div>
+          </Avatar>
+          <p className="text-3xl font-bold ml-2">
+            <a
+              href="https://medium.com/@srinathvb1"
+              target="_noblank"
+              className="text-primary hover:underline"
+            >
+              @srinathvb1
+            </a>
+          </p>
+        </div>
+        <div className="m-3">
+          <div className="animate-pulse rounded bg-slate-700 h-5 w-96 m-2"></div>
+        </div>
+      </section>
       {Array.from(Array(4).keys()).map((i) => (
         <div
           key={i}

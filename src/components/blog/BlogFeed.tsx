@@ -32,14 +32,32 @@ export default async function BlogFeed(): Promise<JSX.Element> {
 
   return (
     <>
-      <Avatar>
-        <AvatarImage src={data.feed.image} />
-        <AvatarFallback>SV</AvatarFallback>
-      </Avatar>
-      <p>{data.feed.title}</p>
-      <a href={data.feed.url} target="_noblank">
-        {data.feed.url}
-      </a>
+      <section className="m-12">
+        <div className="flex items-center justify-center">
+          <Avatar className="w-24 h-24">
+            <AvatarImage src={data.feed.image} />
+            <AvatarFallback className="text-6xl">SV</AvatarFallback>
+          </Avatar>
+          <p className="text-3xl font-bold ml-2">
+            <a
+              href="https://medium.com/@srinathvb1"
+              target="_noblank"
+              className="text-primary hover:underline"
+            >
+              @srinathvb1
+            </a>
+          </p>
+        </div>
+        <div className="m-3">
+          <a
+            href={data.feed.url}
+            target="_noblank"
+            className="text-sm text-primary hover:underline"
+          >
+            My RSS Feed: {data.feed.url} 😁
+          </a>
+        </div>
+      </section>
       {data.items.map((item) => (
         <ArticleCard key={item.title} article={item} />
       ))}
